@@ -1,0 +1,203 @@
+{
+  "breakingNews": "Nova plataforma digital da 4071 reduz tempo de atendimento em 60%",
+  "news": [
+    {
+      "id": 1,
+      "title": "Cooperativa 4071 implementa nova infraestrutura em nuvem",
+      "category": "Tecnologia da Informação",
+      "author": "Carlos Silva",
+      "date": "2025-12-14T10:30:00",
+      "image": "https://picsum.photos/800/450?random=1",
+      "excerpt": "Migração para cloud computing promete maior segurança e disponibilidade dos sistemas, beneficiando todos os cooperados.",
+      "content": "A área de Tecnologia da Informação da Cooperativa 4071 concluiu com sucesso a migração de seus sistemas principais para infraestrutura em nuvem. O projeto, que levou 6 meses para ser implementado, garante maior segurança, escalabilidade e disponibilidade dos serviços.\n\nSegundo o gerente de TI, a nova arquitetura permite backup automático e recuperação de desastres em minutos, além de reduzir custos operacionais em 30%. Todos os dados dos cooperados estão protegidos com criptografia de última geração.\n\nA equipe de TI trabalhou em conjunto com fornecedores certificados e seguiu as melhores práticas de segurança da informação. Os cooperados não tiveram interrupção nos serviços durante todo o processo de migração.",
+      "views": 15420
+    },
+    {
+      "id": 2,
+      "title": "Novo modelo de governança corporativa entra em vigor",
+      "category": "Governança",
+      "author": "Ana Paula Costa",
+      "date": "2025-12-14T09:15:00",
+      "image": "https://picsum.photos/800/450?random=2",
+      "excerpt": "Atualização nas políticas de governança alinha cooperativa às melhores práticas do mercado e fortalece transparência.",
+      "content": "A Cooperativa 4071 implementou um novo modelo de governança corporativa que reforça os princípios de transparência, ética e responsabilidade. As mudanças foram aprovadas em assembleia e entraram em vigor neste mês.\n\nO novo modelo inclui a criação de comitês especializados, maior participação dos cooperados nas decisões estratégicas e relatórios trimestrais de performance. Também foram atualizadas as políticas de compliance e código de conduta.\n\nSegundo a diretoria, as mudanças posicionam a 4071 entre as cooperativas com melhor estrutura de governança do país. O objetivo é garantir sustentabilidade e crescimento responsável a longo prazo.",
+      "views": 12890
+    },
+    {
+      "id": 3,
+      "title": "Sistema de gestão de riscos é modernizado com IA",
+      "category": "Riscos e Controles",
+      "author": "Roberto Mendes",
+      "date": "2025-12-14T08:00:00",
+      "image": "https://picsum.photos/800/450?random=3",
+      "excerpt": "Inteligência artificial identifica padrões de risco com 95% de precisão, reforçando a segurança da cooperativa.",
+      "content": "A área de Riscos e Controles da 4071 implementou sistema avançado de monitoramento que utiliza inteligência artificial para detectar anomalias e prevenir fraudes. A ferramenta analisa milhares de transações em tempo real.\n\nO sistema consegue identificar padrões suspeitos que passariam despercebidos por análise manual, com taxa de precisão superior a 95%. Isso tem reduzido significativamente as tentativas de fraude e melhorado a proteção dos cooperados.\n\nA equipe foi treinada para operar a nova plataforma e todos os processos de controle interno foram revisados. O investimento reforça o compromisso da cooperativa com a segurança e conformidade regulatória.",
+      "views": 18500
+    },
+    {
+      "id": 4,
+      "title": "Nova sede administrativa é inaugurada com espaços modernos",
+      "category": "Administrativo",
+      "author": "Juliana Ferreira",
+      "date": "2025-12-13T16:45:00",
+      "image": "https://picsum.photos/800/450?random=4",
+      "excerpt": "Instalações modernas e sustentáveis oferecem melhor ambiente de trabalho para colaboradores e atendimento aos cooperados.",
+      "content": "A Cooperativa 4071 inaugurou sua nova sede administrativa, um prédio moderno de 5 andares equipado com as mais recentes tecnologias de automação e sustentabilidade. O investimento de R$ 12 milhões marca uma nova fase da instituição.\n\nO edifício conta com salas de reunião inteligentes, espaços de convivência, área de coworking e sistema de ar-condicionado de alta eficiência. Placas solares no telhado garantem parte do consumo energético.\n\nA área administrativa coordenou todo o projeto de mudança, que aconteceu sem interrupção das operações. O novo espaço permite melhor organização das equipes e oferece mais conforto para colaboradores e cooperados.",
+      "views": 9870
+    },
+    {
+      "id": 5,
+      "title": "Resultados financeiros do trimestre superam expectativas",
+      "category": "Financeiro",
+      "author": "Marcos Oliveira",
+      "date": "2025-12-13T14:20:00",
+      "image": "https://picsum.photos/800/450?random=5",
+      "excerpt": "Cooperativa registra crescimento de 22% no patrimônio líquido e distribui sobras recordes aos cooperados.",
+      "content": "A área Financeira da Cooperativa 4071 divulgou os resultados do último trimestre, que mostram crescimento consistente em todos os indicadores. O patrimônio líquido cresceu 22% em relação ao mesmo período do ano anterior.\n\nAs sobras a serem distribuídas aos cooperados atingiram R$ 8,5 milhões, valor recorde na história da cooperativa. A inadimplência se manteve abaixo de 1%, demonstrando a qualidade da carteira de crédito.\n\nSegundo o diretor financeiro, os resultados refletem a gestão prudente dos recursos e a confiança dos cooperados. Os investimentos em tecnologia e capacitação da equipe têm gerado retornos significativos.",
+      "views": 22100
+    },
+    {
+      "id": 6,
+      "title": "Nova política de crédito amplia acesso e reduz burocracia",
+      "category": "Crédito e Cadastro",
+      "author": "Patricia Santos",
+      "date": "2025-12-13T11:30:00",
+      "image": "https://picsum.photos/800/450?random=6",
+      "excerpt": "Modernização dos processos de análise permite aprovação mais rápida e taxas competitivas para cooperados.",
+      "content": "A área de Crédito e Cadastro implementou nova política de concessão que utiliza scoring automatizado e análise comportamental. As mudanças reduziram o tempo médio de aprovação de 5 para 2 dias úteis.\n\nO novo sistema considera histórico de relacionamento com a cooperativa, movimentação financeira e capacidade de pagamento. Cooperados com bom histórico têm acesso a taxas ainda mais competitivas e limites ampliados.\n\nForam simplificados os documentos necessários para solicitação, com digitalização de todo o processo. A equipe de cadastro foi treinada para orientar cooperados sobre as melhores opções de crédito disponíveis.",
+      "views": 16750
+    },
+    {
+      "id": 7,
+      "title": "Programa de recuperação de crédito atinge 85% de sucesso",
+      "category": "Recuperação de Crédito",
+      "author": "Fernando Lima",
+      "date": "2025-12-12T15:40:00",
+      "image": "https://picsum.photos/800/450?random=7",
+      "excerpt": "Abordagem humanizada e condições especiais permitem que cooperados regularizem situação e mantenham relacionamento.",
+      "content": "A área de Recuperação de Crédito da 4071 alcançou taxa de 85% de sucesso em acordos de renegociação nos últimos seis meses. O resultado é fruto de abordagem mais humanizada e flexível com cooperados inadimplentes.\n\nO programa oferece condições especiais de pagamento, com descontos de até 40% em juros e multas, além de prazos estendidos. O objetivo é permitir que cooperados em dificuldades possam regularizar sua situação.\n\nA equipe foi treinada em técnicas de negociação e atendimento empático. Muitos cooperados que regularizaram suas pendências voltaram a utilizar os serviços da cooperativa e recomendam para familiares.",
+      "views": 13200
+    },
+    {
+      "id": 8,
+      "title": "Campanha de Natal da 4071 arrecada 5 toneladas de alimentos",
+      "category": "Marketing",
+      "author": "Camila Rocha",
+      "date": "2025-12-12T13:15:00",
+      "image": "https://picsum.photos/800/450?random=8",
+      "excerpt": "Ação solidária mobiliza cooperados e colaboradores em prol de famílias em situação de vulnerabilidade.",
+      "content": "A campanha de Natal 'Cooperar é Cuidar', desenvolvida pela área de Marketing, superou todas as expectativas ao arrecadar 5 toneladas de alimentos não perecíveis. As doações beneficiarão 300 famílias da região.\n\nA ação envolveu pontos de coleta em todas as agências, divulgação nas redes sociais e parcerias com entidades assistenciais locais. Cooperados que contribuíram concorreram a brindes e descontos em serviços.\n\nSegundo a equipe de Marketing, a campanha reforça o compromisso social da cooperativa e fortalece o vínculo com a comunidade. A entrega das doações acontecerá em evento especial com a presença de cooperados e beneficiados.",
+      "views": 19400
+    },
+    {
+      "id": 9,
+      "title": "Programa de desenvolvimento de talentos forma novos líderes",
+      "category": "Gente",
+      "author": "Ricardo Alves",
+      "date": "2025-12-12T10:00:00",
+      "image": "https://picsum.photos/800/450?random=9",
+      "excerpt": "Iniciativa da área de Gente capacita colaboradores em habilidades de liderança e gestão estratégica.",
+      "content": "A área de Gente lançou o programa 'Líderes 4071', que selecionou 20 colaboradores para formação intensiva em liderança. O curso de 6 meses combina teoria, prática e mentoria com executivos da cooperativa.\n\nOs participantes terão acesso a conteúdos sobre gestão de pessoas, comunicação, tomada de decisão e visão estratégica. Haverá também visitas a outras cooperativas de sucesso e networking com lideranças do setor.\n\nSegundo a gerente de Gente, investir no desenvolvimento interno é fundamental para preparar sucessores e manter a cultura organizacional. Alguns participantes já estão sendo preparados para assumir posições de liderança.",
+      "views": 8650
+    },
+    {
+      "id": 10,
+      "title": "Novos produtos de investimento ampliam opções aos cooperados",
+      "category": "Negócios",
+      "author": "Beatriz Campos",
+      "date": "2025-12-11T16:30:00",
+      "image": "https://picsum.photos/800/450?random=10",
+      "excerpt": "Portfólio expandido inclui fundos de investimento e previdência privada com taxas competitivas.",
+      "content": "A área de Negócios da Cooperativa 4071 lançou nova linha de produtos de investimento em parceria com gestoras renomadas. As opções incluem fundos de renda fixa, multimercado e previdência privada.\n\nOs cooperados terão acesso a investimentos antes restritos a clientes de alta renda, mas com valores de aplicação inicial acessíveis a partir de R$ 500. As taxas de administração são até 50% menores que a média do mercado.\n\nGerentes de negócios foram capacitados para orientar cooperados sobre perfil de investidor e montar carteiras diversificadas. O objetivo é democratizar o acesso a produtos financeiros sofisticados e ajudar cooperados a construir patrimônio.",
+      "views": 11230
+    },
+    {
+      "id": 11,
+      "title": "Hub de inovação da 4071 inicia operações em janeiro",
+      "category": "Inovação",
+      "author": "Lucas Martins",
+      "date": "2025-12-11T14:00:00",
+      "image": "https://picsum.photos/800/450?random=11",
+      "excerpt": "Espaço colaborativo vai fomentar projetos inovadores e parcerias com startups e fintechs.",
+      "content": "A área de Inovação criou o primeiro hub de inovação da Cooperativa 4071, um espaço dedicado ao desenvolvimento de soluções disruptivas para o cooperativismo. O centro iniciará operações em janeiro de 2026.\n\nO hub receberá startups, fintechs e empresas de tecnologia para desenvolver projetos em parceria com a cooperativa. Haverá programas de aceleração, hackathons e eventos de networking com o ecossistema de inovação.\n\nEntre os projetos em desenvolvimento estão soluções de open banking, carteira digital, marketplace para cooperados e plataforma de educação financeira. A iniciativa posiciona a 4071 na vanguarda da transformação digital do cooperativismo.",
+      "views": 14890
+    },
+    {
+      "id": 12,
+      "title": "Mapeamento de processos identifica oportunidades de melhoria",
+      "category": "Processos",
+      "author": "Daniela Souza",
+      "date": "2025-12-11T11:20:00",
+      "image": "https://picsum.photos/800/450?random=12",
+      "excerpt": "Projeto de revisão completa dos fluxos operacionais promete ganhos de eficiência e redução de custos.",
+      "content": "A área de Processos concluiu mapeamento detalhado de todos os fluxos operacionais da Cooperativa 4071. O trabalho de 4 meses identificou 47 oportunidades de otimização e eliminação de gargalos.\n\nForam utilizadas metodologias lean e análise de dados para entender jornadas de cooperados e colaboradores. Processos que levavam dias serão reduzidos a horas com automação e simplificação de etapas.\n\nA implementação das melhorias começará em janeiro, de forma gradual e com treinamento das equipes. A expectativa é reduzir tempo de processos em 40% e custos operacionais em 25% até o final de 2026.",
+      "views": 10560
+    },
+    {
+      "id": 13,
+      "title": "Segurança cibernética é reforçada com nova ferramenta",
+      "category": "Tecnologia da Informação",
+      "author": "Gabriel Costa",
+      "date": "2025-12-10T18:45:00",
+      "image": "https://picsum.photos/800/450?random=13",
+      "excerpt": "Sistema de proteção avançado monitora ameaças 24/7 e protege dados sensíveis dos cooperados.",
+      "content": "A TI implementou solução de segurança cibernética de última geração que monitora e bloqueia ameaças em tempo real. O sistema utiliza machine learning para identificar padrões de ataque e proteger a infraestrutura.\n\nA ferramenta detectou e bloqueou mais de 10 mil tentativas de invasão no primeiro mês de operação. Todos os colaboradores passaram por treinamento sobre phishing, senhas seguras e boas práticas digitais.\n\nO investimento em segurança é prioridade estratégica da cooperativa, garantindo proteção de dados pessoais e financeiros conforme LGPD. Auditorias de segurança serão realizadas trimestralmente.",
+      "views": 17320
+    },
+    {
+      "id": 14,
+      "title": "Comitê de ética aprova novo código de conduta",
+      "category": "Governança",
+      "author": "Sandra Oliveira",
+      "date": "2025-12-10T15:30:00",
+      "image": "https://picsum.photos/800/450?random=14",
+      "excerpt": "Documento atualizado reforça valores e estabelece diretrizes claras para colaboradores e gestores.",
+      "content": "O Comitê de Governança aprovou atualização do código de conduta da Cooperativa 4071, que passa a vigorar imediatamente. O documento reforça princípios de integridade, ética e transparência.\n\nO novo código traz diretrizes específicas sobre conflitos de interesse, uso de informações privilegiadas, relacionamento com fornecedores e comportamento nas redes sociais. Foi criado canal confidencial para denúncias.\n\nTodos os colaboradores participarão de treinamento online obrigatório sobre o código. A adesão aos valores e princípios estabelecidos é condição fundamental para fazer parte da equipe da cooperativa.",
+      "views": 12450
+    },
+    {
+      "id": 15,
+      "title": "Auditoria interna recebe certificação internacional",
+      "category": "Riscos e Controles",
+      "author": "André Ribeiro",
+      "date": "2025-12-10T12:00:00",
+      "image": "https://picsum.photos/800/450?random=15",
+      "excerpt": "Reconhecimento atesta qualidade dos processos de controle e conformidade da cooperativa.",
+      "content": "A área de Riscos e Controles obteve certificação ISO 31000 em gestão de riscos, reconhecimento internacional que atesta a qualidade dos processos internos. A 4071 é uma das poucas cooperativas do país com esta certificação.\n\nA auditoria externa avaliou metodologias, sistemas de controle, processos de monitoramento e capacitação da equipe. Todos os itens receberam avaliação máxima dos auditores internacionais.\n\nA certificação reforça a credibilidade da cooperativa junto a órgãos reguladores, parceiros e cooperados. Demonstra compromisso com excelência em gestão e proteção dos recursos dos associados.",
+      "views": 9780
+    },
+    {
+      "id": 16,
+      "title": "Parceria com universidades oferece estágios e trainee",
+      "category": "Gente",
+      "author": "Mariana Silva",
+      "date": "2025-12-09T16:15:00",
+      "image": "https://picsum.photos/800/450?random=16",
+      "excerpt": "Programa abrirá 30 vagas para jovens talentos em diversas áreas da cooperativa em 2026.",
+      "content": "A área de Gente firmou parceria com 5 universidades da região para programa de estágio e trainee que iniciará em março de 2026. Serão 30 vagas distribuídas em todas as áreas da cooperativa.\n\nOs selecionados terão bolsa-auxílio competitiva, benefícios completos e plano de desenvolvimento individual. Haverá mentoria com gestores experientes e possibilidade de efetivação após conclusão do programa.\n\nO processo seletivo avaliará competências técnicas e comportamentais alinhadas aos valores da cooperativa. Diversidade e inclusão são critérios importantes na seleção dos participantes.",
+      "views": 11670
+    },
+    {
+      "id": 17,
+      "title": "Central de atendimento digital atende 90% das demandas",
+      "category": "Negócios",
+      "author": "Felipe Carvalho",
+      "date": "2025-12-09T13:45:00",
+      "image": "https://picsum.photos/800/450?random=17",
+      "excerpt": "Chatbot inteligente resolve questões de forma rápida e eficiente, melhorando experiência dos cooperados.",
+      "content": "A central de atendimento digital da Cooperativa 4071 alcançou marca de 90% de resolução sem necessidade de atendimento humano. O assistente virtual atende cooperados 24/7 com respostas precisas.\n\nA ferramenta consegue abrir contas, solicitar cartões, consultar extratos, simular empréstimos e esclarecer dúvidas sobre produtos. Para questões complexas, direciona rapidamente para atendentes especializados.\n\nA satisfação dos cooperados com o atendimento digital está em 92%, segundo pesquisa recente. O investimento em tecnologia tem permitido que a equipe presencial foque em atendimentos consultivos de maior valor.",
+      "views": 15890
+    },
+    {
+      "id": 18,
+      "title": "Laboratório de inovação testa blockchain para operações",
+      "category": "Inovação",
+      "author": "Thiago Nascimento",
+      "date": "2025-12-09T10:30:00",
+      "image": "https://picsum.photos/800/450?random=18",
+      "excerpt": "Tecnologia promete revolucionar segurança e rastreabilidade de transações financeiras.",
+      "content": "O laboratório de inovação da 4071 iniciou testes com tecnologia blockchain para aumentar segurança e transparência nas operações. O projeto piloto envolve transferências entre cooperativas e registro de contratos.\n\nA tecnologia cria registro imutável de transações, reduzindo riscos de fraude e facilitando auditorias. Os testes iniciais mostraram redução de 70% no tempo de reconciliação entre sistemas.\n\nCaso os testes sejam bem-sucedidos, a cooperativa planeja expandir uso do blockchain para outras operações. A iniciativa posiciona a 4071 como referência em transformação digital no cooperativismo brasileiro.",
+      "views": 13240
+    }
+  ]
+}

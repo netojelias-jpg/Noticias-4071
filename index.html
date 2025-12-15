@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias da 4071</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=PT+Serif:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="logo-section">
+                    <h1 class="site-title">NOTÍCIAS DA 4071</h1>
+                    <p class="site-tagline">Portal de Informações e Atualidades</p>
+                </div>
+                <div class="header-info">
+                    <span class="date-display" id="currentDate"></span>
+                    <span class="weather-display">São Paulo, 24°C</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-list">
+                    <li><a href="#" data-category="todas">Todas</a></li>
+                    <li><a href="#" data-category="tecnologia da informação">TI</a></li>
+                    <li><a href="#" data-category="governança">Governança</a></li>
+                    <li><a href="#" data-category="riscos e controles">Riscos</a></li>
+                    <li><a href="#" data-category="administrativo">Administrativo</a></li>
+                    <li><a href="#" data-category="financeiro">Financeiro</a></li>
+                    <li><a href="#" data-category="crédito e cadastro">Crédito</a></li>
+                    <li><a href="#" data-category="recuperação de crédito">Recuperação</a></li>
+                    <li><a href="#" data-category="marketing">Marketing</a></li>
+                    <li><a href="#" data-category="gente">Gente</a></li>
+                    <li><a href="#" data-category="negócios">Negócios</a></li>
+                    <li><a href="#" data-category="inovação">Inovação</a></li>
+                    <li><a href="#" data-category="processos">Processos</a></li>
+                </ul>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Buscar notícias...">
+                    <button id="searchBtn">🔍</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breaking News Banner -->
+            <div class="breaking-news" id="breakingNews">
+                <span class="breaking-label">URGENTE</span>
+                <div class="breaking-text" id="breakingText"></div>
+            </div>
+
+            <div class="content-grid">
+                <!-- Main Column -->
+                <section class="main-column">
+                    <!-- Featured Story -->
+                    <article class="featured-story" id="featuredStory">
+                        <!-- Populated by JavaScript -->
+                    </article>
+
+                    <!-- Secondary Stories -->
+                    <div class="secondary-stories" id="secondaryStories">
+                        <!-- Populated by JavaScript -->
+                    </div>
+
+                    <!-- News Grid -->
+                    <div class="news-grid" id="newsGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="load-more-container">
+                        <button class="btn-load-more" id="loadMoreBtn">Carregar Mais Notícias</button>
+                    </div>
+                </section>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Most Read -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Mais Lidas</h3>
+                        <div class="most-read-list" id="mostReadList">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Categorias</h3>
+                        <div class="category-list" id="categoryList">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="sidebar-section newsletter-box">
+                        <h3 class="sidebar-title">Newsletter</h3>
+                        <p>Receba as principais notícias no seu e-mail</p>
+                        <form id="newsletterForm">
+                            <input type="email" placeholder="Seu e-mail" required>
+                            <button type="submit">Inscrever-se</button>
+                        </form>
+                    </div>
+
+                    <!-- Ad Space -->
+                    <div class="sidebar-section ad-space">
+                        <div class="ad-placeholder">
+                            <p>Espaço Publicitário</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sobre</h4>
+                    <p>Notícias da 4071 é seu portal de informações confiáveis e atualizadas.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Anuncie</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Notícias da 4071. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
