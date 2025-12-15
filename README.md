@@ -12,6 +12,7 @@ Sistema de notícias dinâmico desenvolvido para centralizar informações e atu
 
 ## ✨ Funcionalidades
 
+### Frontend Público
 - 📱 **Design Responsivo** - Funciona perfeitamente em desktop, tablet e mobile
 - 🔍 **Busca Avançada** - Pesquise notícias por título, resumo ou conteúdo
 - 🏷️ **Filtros por Categoria** - Navegue por setores específicos
@@ -21,22 +22,51 @@ Sistema de notícias dinâmico desenvolvido para centralizar informações e atu
 - ⚡ **Banner Urgente** - Destaque para informações importantes
 - 📧 **Newsletter** - Sistema de inscrição integrado
 - 🎨 **Modal de Leitura** - Visualização completa de artigos
+- ❤️ **Curtidas** - Sistema de likes para notícias
+- 💬 **Comentários** - Sistema público de comentários
+- 🔄 **Tempo Real** - Atualizações via Socket.IO
+
+### Backend e Admin
+- 🔐 **Autenticação JWT** - Sistema seguro de login
+- 👥 **Dois Níveis de Acesso** - Editor Chefe e Editor Setorial
+- ✏️ **CRUD Completo** - Criar, editar e excluir notícias
+- 📤 **Upload de Imagens** - Sistema de upload real (até 5MB)
+- 🖼️ **Preview de Imagens** - Visualização antes de salvar
+- 🚀 **Socket.IO** - Notificações em tempo real
+- 📊 **Painel Administrativo** - Interface completa de gerenciamento
 
 ## 📂 Estrutura do Projeto
 
 ```
 Noticias-4071/
-├── index.html              # Página principal
+├── backend/
+│   ├── middleware/
+│   │   ├── auth.js         # Autenticação JWT
+│   │   └── upload.js       # Upload de imagens
+│   ├── models/
+│   │   ├── News.js         # Modelo de notícias
+│   │   └── User.js         # Modelo de usuários
+│   └── routes/
+│       ├── auth.js         # Rotas de autenticação
+│       ├── news.js         # Rotas de notícias
+│       └── users.js        # Rotas de usuários
+├── admin/
+│   ├── index.html          # Painel administrativo
+│   └── admin.js            # Lógica do admin
 ├── css/
-│   └── styles.css         # Estilos completos
+│   └── styles.css          # Estilos principais
 ├── js/
-│   └── app.js            # Lógica da aplicação
+│   └── app.js              # Lógica do frontend
 ├── data/
-│   └── news-data.json    # Base de dados de notícias
-├── images/               # Imagens do projeto
-├── .github/
-│   └── copilot-instructions.md
-└── README.md
+│   └── news-data.json      # Base de dados
+├── uploads/                # Imagens enviadas
+├── index.html              # Página principal
+├── server.js               # Servidor Express
+├── package.json            # Dependências
+├── .env                    # Variáveis de ambiente
+├── README.md               # Documentação
+├── BACKEND.md              # Documentação do backend
+└── FEATURES.md             # Lista completa de funcionalidades
 ```
 
 ## 🎨 Categorias
@@ -58,33 +88,96 @@ O portal está organizado por setores da cooperativa:
 
 ## 🚀 Como Usar
 
-### Opção 1: Servidor Local (Recomendado)
+### Instalação
 
-Para evitar problemas de CORS ao carregar o arquivo JSON:
+```bash
+# Clone o repositório
+git clone https://github.com/netojelias-jpg/Noticias-4071.git
 
-```powershell
-# Navegue até a pasta do projeto
-cd "d:\Meus programas\Sicoob\Página de Notícias"
+# Entre na pasta do projeto
+cd Noticias-4071
 
-# Inicie um servidor HTTP local
-python -m http.server 8000
-
-# Acesse no navegador
-# http://localhost:8000
+# Instale as dependências
+npm install
 ```
 
-### Opção 2: Abrir Diretamente
+### Configuração
 
-Abra o arquivo `index.html` diretamente no navegador. 
+Crie um arquivo `.env` na raiz do projeto:
 
-**Nota:** Se o arquivo `news-data.json` não carregar devido a restrições de CORS, o sistema automaticamente gerará notícias de exemplo.
+```env
+PORT=3000
+JWT_SECRET=sua_chave_secreta_aqui
+```
+
+### Executar o Projeto
+
+```bash
+# Modo desenvolvimento (com nodemon)
+npm run dev
+
+# Modo produção
+npm start
+```
+
+O servidor estará disponível em:
+- **Página Pública:** http://localhost:3000
+- **Painel Admin:** http://localhost:3000/admin
+
+### Usuários de Teste
+
+**Editor Chefe:**
+- Email: chefe@4071.com.br
+- Senha: admin123
+
+**Editor TI:**
+- Email: ti@4071.com.br
+- Senha: admin123
+
+**Editor Marketing:**
+- Email: marketing@4071.com.br
+- Senha: admin123
+
+## 🎯 Uso do Sistema
+
+### Para Leitores (Página Pública)
+1. Acesse http://localhost:3000
+2. Navegue pelas categorias ou use a busca
+3. Clique em uma notícia para ler
+4. Curta e comente as notícias
+
+### Para Editores (Painel Admin)
+1. Acesse http://localhost:3000/admin
+2. Faça login com suas credenciais
+3. Crie, edite e gerencie notícias do seu setor
+4. Faça upload de imagens ou use URLs
+
+### Para Editor Chefe
+- Todas as funcionalidades de editor
+- Marcar/desmarcar notícias como destaque
+- Editar/excluir qualquer notícia
+- Definir notícia urgente no banner
 
 ## 🛠️ Tecnologias Utilizadas
 
+### Backend
+- **Node.js** - Runtime JavaScript
+- **Express.js** - Framework web
+- **Socket.IO** - Comunicação em tempo real
+- **JWT** - Autenticação segura
+- **bcrypt** - Criptografia de senhas
+- **Multer** - Upload de arquivos
+
+### Frontend
 - **HTML5** - Estrutura semântica
-- **CSS3** - Estilização moderna com Grid e Flexbox
-- **JavaScript (Vanilla)** - Lógica e interatividade
+- **CSS3** - Grid, Flexbox, Variables
+- **JavaScript (Vanilla ES6+)** - Lógica e interatividade
+- **Socket.IO Client** - Atualizações em tempo real
 - **Google Fonts** - Tipografia profissional (Merriweather, Roboto)
+
+### Armazenamento
+- **JSON** - Sistema de arquivos
+- **File System** - Uploads de imagens
 - **JSON** - Armazenamento de dados
 
 ## 📝 Adicionando Notícias

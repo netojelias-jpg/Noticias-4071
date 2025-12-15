@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const NewsModel = require('../models/News');
-const { auth, isEditorChefe, isEditorSetorial, canEditNews } = require('../middleware/auth');
-
+const { auth, isEditorChefe, isEditorSetorial, canEditNews } = require('../middleware/auth');const upload = require('../middleware/upload');
 // Listar todas as notícias (público)
 router.get('/', async (req, res) => {
     try {
@@ -253,6 +252,130 @@ router.post('/breaking-news', auth, isEditorChefe, async (req, res) => {
         res.status(500).json({ 
             success: false, 
             message: 'Erro ao atualizar notícia urgente.' 
+        });
+    }
+});
+
+// Upload de imagem
+router.post('/upload', auth, upload.single('image'), (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Nenhuma imagem foi enviada' 
+            });
+        }
+        
+        const imageUrl = `/uploads/${req.file.filename}`;
+        res.json({ 
+            success: true,
+            message: 'Imagem enviada com sucesso', 
+            imageUrl: imageUrl 
+        });
+    } catch (error) {
+        console.error('Erro ao fazer upload da imagem:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Erro ao fazer upload da imagem' 
+        });
+    }
+});
+
+// Curtir notícia
+router.post('/:id/like', async (req, res) => {
+    try {
+        const news = await NewsModel.addLike(req.params.id);
+        
+        if (!news) {
+            return res.status(404).json({ 
+                success: false, 
+                message: 'Notícia não encontrada.' 
+            });
+        }
+
+        // Notificar via Socket.io
+        const io = req.app.get('io');
+        io.emit('news-liked', { newsId: news.id, likes: news.likes });
+
+        res.json({
+            success: true,
+            likes: news.likes
+        });
+    } catch (error) {
+        console.error('Erro ao curtir notícia:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Erro ao curtir notícia.' 
+        });
+    }
+});
+
+// Adicionar comentário
+router.post('/:id/comments', async (req, res) => {
+    try {
+        const { author, text } = req.body;
+
+        if (!author || !text) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Nome e comentário são obrigatórios.' 
+            });
+        }
+
+        const comment = await NewsModel.addComment(req.params.id, { author, text });
+        
+        if (!comment) {
+            return res.status(404).json({ 
+                success: false, 
+                message: 'Notícia não encontrada.' 
+            });
+        }
+
+        // Notificar via Socket.io
+        const io = req.app.get('io');
+        io.emit('comment-added', { newsId: parseInt(req.params.id), comment });
+
+        res.json({
+            success: true,
+            comment
+        });
+    } catch (error) {
+        console.error('Erro ao adicionar comentário:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Erro ao adicionar comentário.' 
+        });
+    }
+});
+
+// Deletar comentário
+router.delete('/:newsId/comments/:commentId', async (req, res) => {
+    try {
+        const success = await NewsModel.deleteComment(req.params.newsId, req.params.commentId);
+        
+        if (!success) {
+            return res.status(404).json({ 
+                success: false, 
+                message: 'Comentário não encontrado.' 
+            });
+        }
+
+        // Notificar via Socket.io
+        const io = req.app.get('io');
+        io.emit('comment-deleted', { 
+            newsId: parseInt(req.params.newsId), 
+            commentId: parseInt(req.params.commentId) 
+        });
+
+        res.json({
+            success: true,
+            message: 'Comentário excluído com sucesso.'
+        });
+    } catch (error) {
+        console.error('Erro ao deletar comentário:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Erro ao deletar comentário.' 
         });
     }
 });

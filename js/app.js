@@ -75,6 +75,37 @@ function setupSocketIO() {
             displayBreakingNews(text);
         });
         
+        socket.on('comment-added', ({ newsId, comment }) => {
+            console.log('Novo comentário:', newsId, comment);
+            const newsIndex = allNews.findIndex(n => n.id === newsId);
+            if (newsIndex !== -1) {
+                if (!allNews[newsIndex].comments) {
+                    allNews[newsIndex].comments = [];
+                }
+                allNews[newsIndex].comments.push(comment);
+                
+                // Atualizar modal se estiver aberto
+                const commentsList = document.getElementById(`comments-${newsId}`);
+                if (commentsList) {
+                    commentsList.innerHTML = renderComments(allNews[newsIndex].comments);
+                }
+            }
+        });
+        
+        socket.on('news-liked', ({ newsId, likes }) => {
+            console.log('Notícia curtida:', newsId, likes);
+            const newsIndex = allNews.findIndex(n => n.id === newsId);
+            if (newsIndex !== -1) {
+                allNews[newsIndex].likes = likes;
+                
+                // Atualizar modal se estiver aberto
+                const likesElement = document.getElementById(`likes-${newsId}`);
+                if (likesElement) {
+                    likesElement.textContent = likes;
+                }
+            }
+        });
+        
         socket.on('disconnect', () => {
             console.log('Desconectado do servidor');
         });
@@ -402,11 +433,13 @@ function performSearch(query) {
 // ===== Article Detail Modal =====
 function showArticleDetail(news) {
     // Increment views
+    incrementViews(news.id);
     news.views = (news.views || 0) + 1;
     
     // Create modal
     const modal = document.createElement('div');
     modal.className = 'article-modal';
+    modal.id = `modal-${news.id}`;
     modal.innerHTML = `
         <div class="article-modal-content">
             <button class="modal-close" onclick="this.parentElement.parentElement.remove()">✕</button>
@@ -421,6 +454,26 @@ function showArticleDetail(news) {
                 </div>
                 <div class="modal-content-text">
                     <p>${news.content}</p>
+                </div>
+                
+                <!-- Curtidas -->
+                <div class="article-actions">
+                    <button class="like-button" onclick="likeArticle(${news.id})">
+                        ❤️ Curtir (<span id="likes-${news.id}">${news.likes || 0}</span>)
+                    </button>
+                </div>
+                
+                <!-- Comentários -->
+                <div class="comments-section">
+                    <h3>Comentários (${(news.comments || []).length})</h3>
+                    <div class="comment-form">
+                        <input type="text" id="comment-author-${news.id}" placeholder="Seu nome" required>
+                        <textarea id="comment-text-${news.id}" placeholder="Escreva um comentário..." required></textarea>
+                        <button onclick="addComment(${news.id})">Publicar Comentário</button>
+                    </div>
+                    <div class="comments-list" id="comments-${news.id}">
+                        ${renderComments(news.comments || [])}
+                    </div>
                 </div>
             </div>
         </div>
@@ -495,6 +548,90 @@ function showArticleDetail(news) {
         .modal-content-text p {
             margin-bottom: 1.5rem;
         }
+        .article-actions {
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        .like-button {
+            padding: 0.75rem 1.5rem;
+            background-color: #c8102e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .like-button:hover {
+            background-color: #a00d25;
+        }
+        .comments-section {
+            margin-top: 2rem;
+        }
+        .comments-section h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .comment-form {
+            background: #f8f8f8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--font-sans);
+        }
+        .comment-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .comment-form button {
+            padding: 0.75rem 1.5rem;
+            background-color: #004a99;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .comment-form button:hover {
+            background-color: #003a77;
+        }
+        .comments-list {
+            margin-top: 1rem;
+        }
+        .comment-item {
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .comment-author {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .comment-date {
+            color: #666;
+            font-size: 0.875rem;
+        }
+        .comment-text {
+            color: #333;
+            line-height: 1.6;
+        }
     `;
     
     document.head.appendChild(style);
@@ -514,6 +651,118 @@ function formatDate(dateString) {
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' };
     return date.toLocaleDateString('pt-BR', options);
 }
+
+// ===== Comments and Likes =====
+function renderComments(comments) {
+    if (!comments || comments.length === 0) {
+        return '<p style="color: #666; text-align: center;">Seja o primeiro a comentar!</p>';
+    }
+    
+    return comments.map(comment => `
+        <div class="comment-item">
+            <div class="comment-header">
+                <span class="comment-author">${comment.author}</span>
+                <span class="comment-date">${formatDate(comment.createdAt)}</span>
+            </div>
+            <div class="comment-text">${comment.text}</div>
+        </div>
+    `).join('');
+}
+
+async function addComment(newsId) {
+    const authorInput = document.getElementById(`comment-author-${newsId}`);
+    const textInput = document.getElementById(`comment-text-${newsId}`);
+    
+    const author = authorInput.value.trim();
+    const text = textInput.value.trim();
+    
+    if (!author || !text) {
+        alert('Por favor, preencha seu nome e o comentário.');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`http://localhost:3000/api/news/${newsId}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ author, text })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Limpar formulário
+            authorInput.value = '';
+            textInput.value = '';
+            
+            // Atualizar notícia local
+            const newsIndex = allNews.findIndex(n => n.id === newsId);
+            if (newsIndex !== -1) {
+                if (!allNews[newsIndex].comments) {
+                    allNews[newsIndex].comments = [];
+                }
+                allNews[newsIndex].comments.push(data.comment);
+                
+                // Atualizar lista de comentários
+                const commentsList = document.getElementById(`comments-${newsId}`);
+                if (commentsList) {
+                    commentsList.innerHTML = renderComments(allNews[newsIndex].comments);
+                }
+            }
+            
+            showNotification('Comentário publicado com sucesso!');
+        } else {
+            alert(data.message || 'Erro ao publicar comentário.');
+        }
+    } catch (error) {
+        console.error('Erro ao adicionar comentário:', error);
+        alert('Erro ao publicar comentário. Tente novamente.');
+    }
+}
+
+async function likeArticle(newsId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/news/${newsId}/like`, {
+            method: 'POST'
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Atualizar contador de curtidas
+            const likesElement = document.getElementById(`likes-${newsId}`);
+            if (likesElement) {
+                likesElement.textContent = data.likes;
+            }
+            
+            // Atualizar notícia local
+            const newsIndex = allNews.findIndex(n => n.id === newsId);
+            if (newsIndex !== -1) {
+                allNews[newsIndex].likes = data.likes;
+            }
+            
+            showNotification('Obrigado por curtir!');
+        } else {
+            alert(data.message || 'Erro ao curtir notícia.');
+        }
+    } catch (error) {
+        console.error('Erro ao curtir notícia:', error);
+        alert('Erro ao curtir notícia. Tente novamente.');
+    }
+}
+
+async function incrementViews(newsId) {
+    try {
+        await fetch(`http://localhost:3000/api/news/${newsId}/view`, {
+            method: 'POST'
+        });
+    } catch (error) {
+        console.error('Erro ao incrementar visualizações:', error);
+    }
+}
+
 
 // ===== Sample Data Generator =====
 function generateSampleNews() {

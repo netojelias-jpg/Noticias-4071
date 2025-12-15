@@ -56,6 +56,8 @@ class NewsModel {
             ...newsItem,
             views: 0,
             featured: false,
+            likes: 0,
+            comments: [],
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
         };
@@ -115,6 +117,57 @@ class NewsModel {
         await this.saveNews(data);
         
         return data.news[index];
+    }
+
+    static async addLike(id) {
+        const data = await this.loadNews();
+        const index = data.news.findIndex(n => n.id === parseInt(id));
+        
+        if (index === -1) return false;
+        
+        data.news[index].likes = (data.news[index].likes || 0) + 1;
+        await this.saveNews(data);
+        
+        return data.news[index];
+    }
+
+    static async addComment(id, comment) {
+        const data = await this.loadNews();
+        const index = data.news.findIndex(n => n.id === parseInt(id));
+        
+        if (index === -1) return false;
+        
+        if (!data.news[index].comments) {
+            data.news[index].comments = [];
+        }
+
+        const newComment = {
+            id: Date.now(),
+            author: comment.author,
+            text: comment.text,
+            createdAt: new Date().toISOString()
+        };
+        
+        data.news[index].comments.push(newComment);
+        await this.saveNews(data);
+        
+        return newComment;
+    }
+
+    static async deleteComment(newsId, commentId) {
+        const data = await this.loadNews();
+        const newsIndex = data.news.findIndex(n => n.id === parseInt(newsId));
+        
+        if (newsIndex === -1) return false;
+        if (!data.news[newsIndex].comments) return false;
+        
+        const commentIndex = data.news[newsIndex].comments.findIndex(c => c.id === parseInt(commentId));
+        if (commentIndex === -1) return false;
+        
+        data.news[newsIndex].comments.splice(commentIndex, 1);
+        await this.saveNews(data);
+        
+        return true;
     }
 }
 

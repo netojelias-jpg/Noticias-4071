@@ -283,11 +283,42 @@ function closeModal() {
 
 async function saveNews() {
     const id = document.getElementById('newsId').value;
+    const imageFile = document.getElementById('newsImageFile').files[0];
+    let imageUrl = document.getElementById('newsImage').value;
+    
+    // Se houver arquivo de imagem, fazer upload primeiro
+    if (imageFile) {
+        try {
+            const formData = new FormData();
+            formData.append('image', imageFile);
+            
+            const uploadResponse = await fetch(`${API_URL}/news/upload`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            });
+            
+            const uploadData = await uploadResponse.json();
+            
+            if (uploadData.success) {
+                imageUrl = `http://localhost:3000${uploadData.imageUrl}`;
+            } else {
+                showAlert('Erro ao fazer upload da imagem', 'error');
+                return;
+            }
+        } catch (error) {
+            showAlert('Erro ao fazer upload da imagem', 'error');
+            return;
+        }
+    }
+    
     const newsData = {
         title: document.getElementById('newsTitle').value,
         category: document.getElementById('newsCategory').value,
         author: document.getElementById('newsAuthor').value,
-        image: document.getElementById('newsImage').value,
+        image: imageUrl || 'https://picsum.photos/800/450?random=' + Date.now(),
         excerpt: document.getElementById('newsExcerpt').value,
         content: document.getElementById('newsContent').value
     };
@@ -423,4 +454,19 @@ function formatDate(dateString) {
         hour: '2-digit',
         minute: '2-digit'
     });
+}
+
+// Preview de imagem
+function previewImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('previewImg').src = e.target.result;
+            document.getElementById('imagePreview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+        document.getElementById('imagePreview').style.display = 'none';
+    }
 }
