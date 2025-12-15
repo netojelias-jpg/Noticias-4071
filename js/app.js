@@ -4,10 +4,12 @@ let filteredNews = [];
 let currentCategory = 'todas';
 let newsPerPage = 9;
 let currentPage = 1;
+let socket = null;
 
 // ===== Initialization =====
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
+    setupSocketIO();
 });
 
 async function initializeApp() {
@@ -17,6 +19,91 @@ async function initializeApp() {
     displayNews();
     updateMostRead();
     updateCategoryList();
+}
+
+// ===== Socket.IO - Atualizações em Tempo Real =====
+function setupSocketIO() {
+    try {
+        socket = io('http://localhost:3000');
+        
+        socket.on('connect', () => {
+            console.log('Conectado ao servidor de atualizações');
+        });
+        
+        socket.on('news-created', (news) => {
+            console.log('Nova notícia criada:', news);
+            allNews.unshift(news);
+            filteredNews = [...allNews];
+            displayNews();
+            updateMostRead();
+            updateCategoryList();
+            showNotification('Nova notícia publicada!');
+        });
+        
+        socket.on('news-updated', (news) => {
+            console.log('Notícia atualizada:', news);
+            const index = allNews.findIndex(n => n.id === news.id);
+            if (index !== -1) {
+                allNews[index] = news;
+                filteredNews = [...allNews];
+                displayNews();
+                updateMostRead();
+            }
+        });
+        
+        socket.on('news-deleted', ({ id }) => {
+            console.log('Notícia deletada:', id);
+            allNews = allNews.filter(n => n.id !== id);
+            filteredNews = [...allNews];
+            displayNews();
+            updateMostRead();
+            updateCategoryList();
+        });
+        
+        socket.on('news-featured', (news) => {
+            console.log('Destaque atualizado:', news);
+            const index = allNews.findIndex(n => n.id === news.id);
+            if (index !== -1) {
+                allNews[index] = news;
+                filteredNews = [...allNews];
+                displayNews();
+            }
+        });
+        
+        socket.on('breaking-news-updated', ({ text }) => {
+            console.log('Breaking news atualizada:', text);
+            displayBreakingNews(text);
+        });
+        
+        socket.on('disconnect', () => {
+            console.log('Desconectado do servidor');
+        });
+    } catch (error) {
+        console.log('Socket.IO não disponível, modo estático');
+    }
+}
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: #28a745;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
 // ===== Date Display =====
@@ -35,6 +122,33 @@ function updateCurrentDate() {
 
 // ===== Load News Data =====
 async function loadNewsData() {
+    try {
+        // Tentar carregar da API primeiro
+        const response = await fetch('http://localhost:3000/api/news');
+        if (!response.ok) {
+            throw new Error('API não disponível');
+        }
+        const data = await response.json();
+        
+        if (data.success) {
+            allNews = data.news;
+            filteredNews = [...allNews];
+            
+            // Carregar breaking news
+            const newsDataResponse = await fetch('data/news-data.json');
+            if (newsDataResponse.ok) {
+                const newsData = await newsDataResponse.json();
+                if (newsData.breakingNews) {
+                    displayBreakingNews(newsData.breakingNews);
+                }
+            }
+            return;
+        }
+    } catch (error) {
+        console.log('API não disponível, carregando do JSON estático...');
+    }
+    
+    // Fallback para JSON estático
     try {
         const response = await fetch('data/news-data.json');
         if (!response.ok) {
