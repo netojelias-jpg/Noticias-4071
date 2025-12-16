@@ -77,6 +77,17 @@ const canEditNews = async (req, res, next) => {
     }
 };
 
+// Middleware para verificar se pode publicar notícia urgente
+const canPublishBreakingNews = async (req, res, next) => {
+    if (req.user.role !== 'editor-chefe' && !req.user.canPublishBreakingNews) {
+        return res.status(403).json({ 
+            success: false, 
+            message: 'Acesso negado. Você não tem permissão para publicar notícia urgente.' 
+        });
+    }
+    next();
+};
+
 module.exports = {
     auth,
     isEditorChefe,
