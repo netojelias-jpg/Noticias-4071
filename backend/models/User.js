@@ -8,7 +8,8 @@ let users = [
         email: 'chefe@4071.com.br',
         password: '$2a$10$SwI8bdpdSqui3djNzOyFyOQL/BIKWqNzm6bryhHa.guKK4lflNL5e', // senha: admin123
         role: 'editor-chefe',
-        sector: null
+        sector: null,
+        canPublishBreakingNews: true
     },
     {
         id: 2,
@@ -16,7 +17,8 @@ let users = [
         email: 'ti@4071.com.br',
         password: '$2a$10$SwI8bdpdSqui3djNzOyFyOQL/BIKWqNzm6bryhHa.guKK4lflNL5e', // senha: admin123
         role: 'editor-setorial',
-        sector: 'Tecnologia da Informação'
+        sector: 'Tecnologia da Informação',
+        canPublishBreakingNews: false
     },
     {
         id: 3,
@@ -24,7 +26,8 @@ let users = [
         email: 'marketing@4071.com.br',
         password: '$2a$10$SwI8bdpdSqui3djNzOyFyOQL/BIKWqNzm6bryhHa.guKK4lflNL5e', // senha: admin123
         role: 'editor-setorial',
-        sector: 'Marketing'
+        sector: 'Marketing',
+        canPublishBreakingNews: false
     }
 ];
 

@@ -2,6 +2,22 @@
   "breakingNews": "Nova plataforma digital da 4071 reduz tempo de atendimento em 60%",
   "news": [
     {
+      "id": 19,
+      "title": "Sicoob AC Credi Planeja Crescimento Acelerado: 30% na Carteira de Crédito e Novo Cargo Estratégico",
+      "category": "Governança",
+      "excerpt": "A Diretoria Executiva do Sicoob AC Credi deliberou, em reunião na última segunda-feira, sobre taxas de juros, mercado e orçamento, definindo metas de 30% de crescimento na carteira de crédito e 16% na captação de depósitos para o próximo ano. Foi aprovado o novo cargo de Analista Senior para análises de mercado e projeções, reforçando os princípios cooperativistas e o foco no cooperado.",
+      "content": "Na última segunda-feira, a Diretoria Executiva do Sicoob AC Credi se reuniu para deliberações estratégicas que reforçam o compromisso com o crescimento sustentável e o \"jeito 4071 de ser\". Com foco na adesão livre e voluntária, um dos sete princípios cooperativistas que guiam nossa atuação, a reunião analisou as taxas de juros e o cenário de mercado, além de projeções de expectativa de crescimento para o próximo ano e o orçamento anual.Entre as principais conclusões, destaca-se a meta ambiciosa de expandir em 30% a carteira de crédito, impulsionando oportunidades para nossos cooperados e fortalecendo a participação econômica dos membros – outro pilar fundamental do cooperativismo. Paralelamente, prevemos um aumento de 16% na captação de depósitos, garantindo maior autonomia e independência financeira para a cooperativa. Essas projeções refletem nossa prioridade: você, o cooperado, sempre no centro das decisões.Para apoiar essas iniciativas, a diretoria aprovou a criação de um novo cargo de Analista Senior, dedicado a análises de mercado, precificação, estruturação de operações e projeções econômicas. Essa medida visa aprimorar a educação, formação e informação, alinhando-se aos princípios de intercooperação e compromisso com a comunidade. No Sicoob AC Credi, mais de 40 motivos para se associar se somam aos 7 princípios e à 1 prioridade: você. A sua 4071 continua inovando para um futuro próspero.",
+      "image": "http://localhost:3000/uploads/news-1765801131145-16364533.png",
+      "author": "José Elias Neto",
+      "date": "2025-12-15T12:18:51.313Z",
+      "views": 0,
+      "featured": false,
+      "likes": 0,
+      "comments": [],
+      "createdAt": "2025-12-15T12:18:51.314Z",
+      "updatedAt": "2025-12-15T12:18:51.314Z"
+    },
+    {
       "id": 1,
       "title": "Cooperativa 4071 implementa nova infraestrutura em nuvem",
       "category": "Tecnologia da Informação",
@@ -21,7 +37,7 @@
       "image": "https://picsum.photos/800/450?random=2",
       "excerpt": "Atualização nas políticas de governança alinha cooperativa às melhores práticas do mercado e fortalece transparência.",
       "content": "A Cooperativa 4071 implementou um novo modelo de governança corporativa que reforça os princípios de transparência, ética e responsabilidade. As mudanças foram aprovadas em assembleia e entraram em vigor neste mês.\n\nO novo modelo inclui a criação de comitês especializados, maior participação dos cooperados nas decisões estratégicas e relatórios trimestrais de performance. Também foram atualizadas as políticas de compliance e código de conduta.\n\nSegundo a diretoria, as mudanças posicionam a 4071 entre as cooperativas com melhor estrutura de governança do país. O objetivo é garantir sustentabilidade e crescimento responsável a longo prazo.",
-      "views": 12890
+      "views": 12891
     },
     {
       "id": 3,

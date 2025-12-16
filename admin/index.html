@@ -298,6 +298,82 @@
         .hidden {
             display: none !important;
         }
+
+        /* Users Table */
+        .users-table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .users-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .users-table thead {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .users-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+        }
+
+        .users-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .users-table tbody tr:hover {
+            background: #f8f8f8;
+        }
+
+        .users-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .role-chefe {
+            background: #c8102e;
+            color: white;
+        }
+
+        .role-setorial {
+            background: #004a99;
+            color: white;
+        }
+
+        .btn-small {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -345,6 +421,7 @@
                 <button class="tab active" onclick="switchTab('myNews')">Minhas Notícias</button>
                 <button class="tab" onclick="switchTab('allNews')">Todas as Notícias</button>
                 <button id="tabBreakingNews" class="tab hidden" onclick="switchTab('breakingNews')">Notícia Urgente</button>
+                <button id="tabUsers" class="tab hidden" onclick="switchTab('users')">Usuários</button>
             </div>
 
             <!-- Tab: Minhas Notícias -->
@@ -368,6 +445,88 @@
                 </div>
                 <button class="btn-primary" onclick="updateBreakingNews()" style="width: auto;">Atualizar</button>
             </div>
+
+            <!-- Tab: Usuários (Editor Chefe apenas) -->
+            <div id="usersTab" class="tab-content">
+                <button class="btn-primary" onclick="openUserModal()" style="width: auto; margin-bottom: 1.5rem;">
+                    ➕ Novo Usuário
+                </button>
+                <div class="users-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Função</th>
+                                <th>Setor</th>
+                                <th style="text-align: center;">Notícia Urgente</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Criar Usuário -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Usuário</h2>
+                <button class="modal-close" onclick="closeUserModal()">&times;</button>
+            </div>
+            <form id="userForm">
+                <div class="form-group">
+                    <label for="userName">Nome *</label>
+                    <input type="text" id="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email *</label>
+                    <input type="email" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">Senha *</label>
+                    <input type="password" id="userPassword" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="userRole">Função *</label>
+                    <select id="userRole" required onchange="toggleSectorField()">
+                        <option value="">Selecione...</option>
+                        <option value="editor-chefe">Editor Chefe</option>
+                        <option value="editor-setorial">Editor Setorial</option>
+                    </select>
+                </div>
+                <div class="form-group" id="sectorGroup" style="display: none;">
+                    <label for="userSector">Setor *</label>
+                    <select id="userSector">
+                        <option value="">Selecione...</option>
+                        <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+                        <option value="Governança">Governança</option>
+                        <option value="Riscos e Controles">Riscos e Controles</option>
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="Crédito e Cadastro">Crédito e Cadastro</option>
+                        <option value="Recuperação de Crédito">Recuperação de Crédito</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Gente">Gente</option>
+                        <option value="Negócios">Negócios</option>
+                        <option value="Inovação">Inovação</option>
+                        <option value="Processos">Processos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" id="canPublishBreakingNews" style="width: auto;">
+                        <span>Pode publicar Notícia Urgente</span>
+                    </label>
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">Permite que o usuário defina o banner de notícia urgente</small>
+                </div>
+                <button type="submit" class="btn-primary">Criar Usuário</button>
+            </form>
         </div>
     </div>
 

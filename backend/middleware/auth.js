@@ -81,5 +81,6 @@ module.exports = {
     auth,
     isEditorChefe,
     isEditorSetorial,
-    canEditNews
+    canEditNews,
+    canPublishBreakingNews
 };

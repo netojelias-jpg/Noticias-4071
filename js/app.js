@@ -10,6 +10,7 @@ let socket = null;
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
     setupSocketIO();
+    setupMobileMenu();
 });
 
 async function initializeApp() {
@@ -805,3 +806,33 @@ function generateSampleNews() {
 
 // Make showArticleDetail available globally
 window.showArticleDetail = showArticleDetail;
+
+// ===== Mobile Menu =====
+function setupMobileMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    
+    if (menuToggle && navList) {
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        const navLinks = navList.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+        
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navList.contains(e.target)) {
+                navList.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    }
+}

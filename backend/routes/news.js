@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const NewsModel = require('../models/News');
-const { auth, isEditorChefe, isEditorSetorial, canEditNews } = require('../middleware/auth');const upload = require('../middleware/upload');
+const { auth, isEditorChefe, isEditorSetorial, canEditNews, canPublishBreakingNews } = require('../middleware/auth');const upload = require('../middleware/upload');
 // Listar todas as notícias (público)
 router.get('/', async (req, res) => {
     try {
@@ -231,8 +231,8 @@ router.patch('/:id/featured', auth, isEditorChefe, async (req, res) => {
     }
 });
 
-// Atualizar notícia urgente (apenas Editor Chefe)
-router.post('/breaking-news', auth, isEditorChefe, async (req, res) => {
+// Atualizar notícia urgente (Editor Chefe ou usuários com permissão)
+router.post('/breaking-news', auth, canPublishBreakingNews, async (req, res) => {
     try {
         const { text } = req.body;
 

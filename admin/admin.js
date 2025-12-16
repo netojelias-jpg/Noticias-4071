@@ -91,8 +91,11 @@ function showAdmin() {
             currentUser.role === 'editor-chefe' ? 'Editor Chefe' : 
             `Editor Setorial - ${currentUser.sector}`;
         
-        // Mostrar tab de breaking news apenas para Editor Chefe
+        // Mostrar tabs baseado em permissões
         if (currentUser.role === 'editor-chefe') {
+            document.getElementById('tabBreakingNews').classList.remove('hidden');
+            document.getElementById('tabUsers').classList.remove('hidden');
+        } else if (currentUser.canPublishBreakingNews) {
             document.getElementById('tabBreakingNews').classList.remove('hidden');
         }
     }
@@ -146,6 +149,9 @@ function switchTab(tabName) {
     } else if (tabName === 'breakingNews') {
         document.getElementById('breakingNewsTab').classList.add('active');
         loadBreakingNews();
+    } else if (tabName === 'users') {
+        document.getElementById('usersTab').classList.add('active');
+        loadUsers();
     }
 }
 
@@ -468,5 +474,180 @@ function previewImage(event) {
         reader.readAsDataURL(file);
     } else {
         document.getElementById('imagePreview').style.display = 'none';
+    }
+}
+
+// ===== User Management =====
+
+// Carregar usuários
+async function loadUsers() {
+    try {
+        const response = await fetch(`${API_URL}/users`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            renderUsers(data.users);
+        } else {
+            showAlert(data.message || 'Erro ao carregar usuários', 'error');
+        }
+    } catch (error) {
+        console.error('Erro ao carregar usuários:', error);
+        showAlert('Erro ao carregar usuários', 'error');
+    }
+}
+
+// Renderizar lista de usuários
+function renderUsers(users) {
+    const tbody = document.getElementById('usersList');
+    
+    if (!users || users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #666;">Nenhum usuário encontrado</td></tr>';
+        return;
+    }
+    
+    tbody.innerHTML = users.map(user => `
+        <tr>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>
+                <span class="role-badge ${user.role === 'editor-chefe' ? 'role-chefe' : 'role-setorial'}">
+                    ${user.role === 'editor-chefe' ? 'Editor Chefe' : 'Editor Setorial'}
+                </span>
+            </td>
+            <td>${user.sector || '-'}</td>
+            <td style="text-align: center;">
+                ${user.canPublishBreakingNews ? '✅' : '❌'}
+            </td>
+            <td>
+                ${user.id !== currentUser.id ? `
+                    <button class="btn-small btn-delete" onclick="deleteUser(${user.id})">
+                        🗑️ Excluir
+                    </button>
+                ` : '<span style="color: #999; font-size: 0.875rem;">Você</span>'}
+            </td>
+        </tr>
+    `).join('');
+}
+
+// Abrir modal de usuário
+function openUserModal() {
+    document.getElementById('userForm').reset();
+    document.getElementById('sectorGroup').style.display = 'none';
+    document.getElementById('userModal').classList.add('active');
+}
+
+// Fechar modal de usuário
+function closeUserModal() {
+    document.getElementById('userModal').classList.remove('active');
+    document.getElementById('userForm').reset();
+}
+
+// Fechar modais ao clicar fora
+window.addEventListener('click', (e) => {
+    const newsModal = document.getElementById('newsModal');
+    const userModal = document.getElementById('userModal');
+    
+    if (e.target === newsModal) {
+        closeModal();
+    }
+    if (e.target === userModal) {
+        closeUserModal();
+    }
+});
+
+// Toggle campo de setor
+function toggleSectorField() {
+    const role = document.getElementById('userRole').value;
+    const sectorGroup = document.getElementById('sectorGroup');
+    const sectorSelect = document.getElementById('userSector');
+    
+    if (role === 'editor-setorial') {
+        sectorGroup.style.display = 'block';
+        sectorSelect.required = true;
+    } else {
+        sectorGroup.style.display = 'none';
+        sectorSelect.required = false;
+        sectorSelect.value = '';
+    }
+}
+
+// Form de criação de usuário
+document.getElementById('userForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await createUser();
+});
+
+async function createUser() {
+    const userData = {
+        name: document.getElementById('userName').value,
+        email: document.getElementById('userEmail').value,
+        password: document.getElementById('userPassword').value,
+        role: document.getElementById('userRole').value,
+        sector: document.getElementById('userSector').value || null,
+        canPublishBreakingNews: document.getElementById('canPublishBreakingNews').checked
+    };
+    
+    // Validação
+    if (userData.role === 'editor-setorial' && !userData.sector) {
+        showAlert('Por favor, selecione um setor para Editor Setorial', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(userData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert('Usuário criado com sucesso!', 'success');
+            closeUserModal();
+            loadUsers();
+        } else {
+            showAlert(data.message || 'Erro ao criar usuário', 'error');
+        }
+    } catch (error) {
+        console.error('Erro ao criar usuário:', error);
+        showAlert('Erro ao criar usuário', 'error');
+    }
+}
+
+// Deletar usuário
+async function deleteUser(userId) {
+    if (!confirm('Tem certeza que deseja excluir este usuário?')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/users/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert('Usuário excluído com sucesso!', 'success');
+            loadUsers();
+        } else {
+            showAlert(data.message || 'Erro ao excluir usuário', 'error');
+        }
+    } catch (error) {
+        console.error('Erro ao excluir usuário:', error);
+        showAlert('Erro ao excluir usuário', 'error');
     }
 }
